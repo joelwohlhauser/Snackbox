@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Hey {{dialogData.username}}</h1>
+<div mat-dialog-content>
+  <p>Please enter the SMS code you've received.</p>
+  <mat-form-field>
+    <mat-label>SMS Code</mat-label>
+    <input matInput [(ngModel)]="dialogData.smsToken" cdkFocusInitial>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="dialogData.smsToken">Ok</button>
+</div>

@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="heading">
+    <h1>Explore new Recipes</h1>
+  </div>
+
+  <div class="recipesContainer">
+    <div class="recipes">
+
+      <mat-card class="recipe" *ngFor="let recipe of publicRecipes" [routerLink]="'/recipe/' + recipe.id">
+        <h2>{{ recipe.title }}</h2>
+        <div mat-card-image class="recipeImage" [ngStyle]="{'background-image': 'url(' + recipe.imageURL + ')'}"></div>
+        <div class="recipeDetails">
+          <div>
+            <mat-icon>access_time</mat-icon>
+            <span class="aligned-with-icon">Cooking Time:
+              <span class="detailText" contenteditable="true">{{ recipe.cookingTime }}</span>
+              <span class="detailText"> min.</span>
+            </span>
+          </div>
+          <div>
+            <mat-icon>pie_chart</mat-icon>
+            <span class="aligned-with-icon">Serving Size:
+              <span class="detailText">{{ recipe.servingSize }}</span>
+            </span>
+          </div>
+          <div>
+            <mat-icon>account_circle</mat-icon>
+            <span class="aligned-with-icon">Autor:
+              <span class="detailText">{{ recipe.autor }}</span>
+            </span>
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
+  </div>
+</div>

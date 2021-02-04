@@ -1,0 +1,18 @@
+<header>
+  <mat-toolbar color="primary">
+    <img routerLink='/' class="headerLogo" src="../assets/white_transparent_logo.png">
+    <span class="example-spacer"></span>
+    <div class="rightContainer">
+      <button mat-button routerLink='/explore'>Explore</button>
+      <button mat-raised-button routerLink='/recipe/new' *ngIf="isLoggedIn">Create Recipe</button>
+      <button mat-raised-button routerLink='/login' *ngIf="!isLoggedIn">Login</button>
+      <button mat-raised-button routerLink='/register' *ngIf="!isLoggedIn">Register</button>
+      <button mat-stroked-button routerLink='/dashboard' *ngIf="isLoggedIn" class="borderButton">Dashboard</button>
+      <button mat-stroked-button (click)="signOut()" *ngIf="isLoggedIn" class="borderButton">Sign out</button>
+    </div>
+  </mat-toolbar>
+</header>
+
+<div class="routerContainer">
+  <router-outlet></router-outlet>
+</div>

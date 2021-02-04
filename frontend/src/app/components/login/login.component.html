@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="signInUpContainer">
+    <mat-card>
+      <form #form="ngForm" [formGroup]="frmSignin" (ngSubmit)="login(form.value)">
+        <h1>Login</h1>
+        <div *ngIf="gotError" class="errorMessage">
+          {{ errorText }}
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput id="username" formControlName="username">
+          <mat-error
+            *ngIf="frmSignin.controls['username'].hasError('required') || frmSignin.controls['username'].hasError('minlength')">
+            Please enter your full username.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput [type]="passwordHide ? 'password' : 'text'" id="password"
+            formControlName="password">
+          <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'"
+            type="button" [attr.aria-pressed]="passwordHide">
+            <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error
+            *ngIf="frmSignin.controls['password'].hasError('required') || frmSignin.controls['password'].hasError('minlength')">
+            Please enter your full password.</mat-error>
+        </mat-form-field>
+
+        <button [disabled]="frmSignin.invalid" mat-raised-button color="primary" type="submit">Login</button>
+      </form>
+      <button mat-raised-button class="googleSignIn" (click)="googleSignIn()">Sign in with
+        Google</button>
+      <p>Not registered? <a routerLink='/register'>Register</a></p>
+    </mat-card>
+  </div>
+</div>

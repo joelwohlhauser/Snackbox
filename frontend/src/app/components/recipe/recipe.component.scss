@@ -1,0 +1,190 @@
+.container-fluid {
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #ece7e2a6 100%);
+  padding-bottom: 50px;
+}
+
+mat-card {
+  max-width: 490px;
+}
+
+.recipeContainer {
+  padding-top: 50px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 200px 175px 75px 250px 1fr;
+  gap: 20px 20px;
+  grid-template-areas:
+    "recipeImage recipeDetails"
+    "recipeImage recipeDetails"
+    "recipeImage recipepreparation"
+    "recipeIngredients recipepreparation"
+    "recipeIngredients recipepreparation"
+    "comments comments";
+}
+
+.recipeImage { grid-area: recipeImage; }
+
+.recipeDetails {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 98px;
+  gap: 0px 0px;
+  grid-template-areas:
+    "details"
+    "actions";
+  grid-area: recipeDetails;
+}
+.actions { grid-area: actions; }
+.details { grid-area: details; }
+
+.recipepreparation { grid-area: recipepreparation; }
+
+.recipeIngredients { grid-area: recipeIngredients; }
+
+.comments { grid-area: comments; }
+
+
+.recipeContainer mat-card {
+  width: 100%;
+  padding: 40px;
+  text-align: left;
+}
+
+.recipeImage mat-card {
+  float: right;
+  height: 490px;
+  width: 490px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0px;
+}
+
+.changeImageExplanation {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffffa6;
+  line-height: 41px;
+  padding-left: 15px;
+  height: 40px;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.recipeDetails .details {
+  padding: 0px 25px 25px 25px;
+}
+
+.recipeDetails .details h1 {
+  font-size: 55px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 40px;
+  line-height: normal;
+  width: 440px;
+}
+
+.recipeDetails .actions mat-card {
+  padding: 25px;
+  height: 98px;
+}
+
+.recipeDetails .actions button {
+  height: 48px;
+  width: 48px;
+  margin-left: 15px;
+  box-shadow: none;
+  border: solid 1px rgba(0,0,0,.12);
+}
+
+.recipeDetails .actions mat-button-toggle {
+  width: 110px;
+}
+
+.recipeDetails .actions .deleteButton {
+  background-color: #cb2115;
+}
+
+.recipeDetails .actions .restoreButton {
+  background-color: #9241b7;
+}
+
+.recipeDetails .actions .leftActions {
+  float: left;
+  margin: 0px;
+}
+
+.recipeDetails .actions .rightActions {
+  float: right;
+  margin: 0px;
+}
+
+.recipeIngredients mat-card {
+  float: right;
+}
+
+.recipepreparation p, .recipeIngredients p {
+  height: 100%;
+  font-size: 17px;
+  line-height: 1.5;
+  min-height: 100px;
+}
+
+.recipepreparation h1, .recipeIngredients h1, .comments h1 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.comments {
+  padding-top: 55px;
+}
+
+.comments mat-card {
+  width: 1000px;
+  max-width: none;
+  margin: 0 auto;
+}
+
+.newComment textarea {
+  height: 100px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #a7a7a7;
+  margin-bottom: 15px;
+  min-height: 50px;
+  max-height: 300px;
+}
+
+.newComment button {
+  float: right;
+}
+
+.otherComment { 
+  margin-top: 100px;
+}
+
+.otherComment mat-card {
+  width: 100%;
+  padding: 25px;
+  box-shadow: none;
+  border: 2px solid #d8d8d8;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: #8297af0d;
+}
+
+.otherComment h3 {
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.notLoggedInWarning {
+  font-weight: 500;
+  font-size: 17px;
+  color: #d50000;
+}

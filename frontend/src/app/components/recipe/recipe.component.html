@@ -1,0 +1,102 @@
+<div class="container-fluid">
+  <div class="recipeContainer">
+
+    <div class="recipeImage">
+      <mat-card (click)="ChangeImage()" [ngStyle]="{'background-image': 'url(' + myRecipe.imageURL + ')'}">
+        <div class="changeImageExplanation" *ngIf="canEditRecipe">Click on image to change it</div>
+      </mat-card>
+    </div>
+
+    <div class="recipeDetails">
+      <div class="details">
+        <h1 [contentEditable]="canEditRecipe" (blur)="ValueChanged('title', $event)" (keydown)="DisableEnter($event)">
+          {{ myRecipe.title }}
+        </h1>
+        <div>
+          <mat-icon>access_time</mat-icon>
+          <span class="aligned-with-icon">Cooking Time:
+            <span class="detailText" [contentEditable]="canEditRecipe" (keydown)="NumbersOnly($event)"
+              (blur)="ValueChanged('cookingTime', $event)" (keydown)="DisableEnter($event)">{{
+              (myRecipe.cookingTime).toString()
+              }}</span>
+            <span class="detailText"> min.</span>
+          </span>
+        </div>
+        <div>
+          <mat-icon>pie_chart</mat-icon>
+          <span class="aligned-with-icon">Serving Size:
+            <span class="detailText" [contentEditable]="canEditRecipe" (keydown)="NumbersOnly($event)"
+              (blur)="ValueChanged('servingSize', $event)" (keydown)="DisableEnter($event)">{{
+              (myRecipe.servingSize).toString()
+              }}</span>
+          </span>
+        </div>
+        <div>
+          <mat-icon>account_circle</mat-icon>
+          <span class="aligned-with-icon">Autor:
+            <span class="detailText">{{ myRecipe.autor }}</span>
+          </span>
+        </div>
+      </div>
+      <div class="actions">
+        <mat-card *ngIf="canEditRecipe">
+          <div class="leftActions">
+            <mat-button-toggle-group name="status" [value]="(myRecipe.statusNumber).toString()" aria-label="Status">
+              <mat-button-toggle value="1" (change)="ChangeStatus($event.value)">Published</mat-button-toggle>
+              <mat-button-toggle value="2" (change)="ChangeStatus($event.value)">Private</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <div class="rightActions">
+            <button mat-mini-fab class="deleteButton" *ngIf="myRecipe.statusNumber != 3" (click)="ChangeStatus(3)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-mini-fab class="restoreButton" *ngIf="myRecipe.statusNumber == 3" (click)="ChangeStatus(2)">
+              <mat-icon>restore_from_trash</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="recipeIngredients">
+      <mat-card>
+        <h1>Ingredients</h1>
+        <p [contentEditable]="canEditRecipe" (blur)="ValueChanged('ingredients', $event)">
+          {{ myRecipe.ingredients }}
+        </p>
+      </mat-card>
+    </div>
+
+    <div class="recipepreparation">
+      <mat-card>
+        <h1>Preparation</h1>
+        <p [contentEditable]="canEditRecipe" (blur)="ValueChanged('preparation', $event)">
+          {{ myRecipe.preparation }}
+        </p>
+      </mat-card>
+    </div>
+
+    <div class="comments">
+      <mat-card>
+        <div class="newComment">
+          <form #form="ngForm" (ngSubmit)="PostComment(form.value.commentText)">
+            <h1>Comments</h1>
+            <p *ngIf="!isLoggedIn" class="notLoggedInWarning">Login to comment.</p>
+            <textarea [disabled]="!isLoggedIn" [(ngModel)]="commentText" id="commentText" name="commentText"
+              required></textarea>
+            <button mat-raised-button color="primary" [disabled]="!isLoggedIn" type="submit">Post Comment</button>
+          </form>
+        </div>
+        <div class="otherComment">
+          <mat-card *ngFor="let comment of myComments">
+            <h3>{{ comment.username }}</h3>
+            <p>
+              {{ comment.text }}
+            </p>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+</div>

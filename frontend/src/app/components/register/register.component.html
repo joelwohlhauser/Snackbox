@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="signInUpContainer">
+    <mat-card>
+      <h1>Register</h1>
+      <form #form="ngForm" [formGroup]="frmSignup" (ngSubmit)="register(form.value)">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput id="username" formControlName="username">
+          <mat-error
+            *ngIf="frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')">
+            The username must be at least 5
+            characters long!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Phone number</mat-label>
+          <input type="text" matInput id="phone" formControlName="phone">
+          <mat-error
+            *ngIf="frmSignup.controls['phone'].hasError('required') || frmSignup.controls['phone'].hasError('isValidPhoneNumber')">
+            Enter a valid phone number!</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input [type]="passwordHide ? 'password' : 'text'" matInput id="password" formControlName="password">
+          <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide; confirmHide = true" type="button"
+            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+            <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div class="passwordRequirements">
+          <label class="col"
+            [ngClass]="frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">{{ frmSignup.controls['password'].hasError('required') ||
+              frmSignup.controls['password'].hasError('minlength') ? 'cancel' :
+              'check_circle' }}</i>
+            Must be at least 8 characters long
+          </label>
+
+          <label class="col"
+            [ngClass]="frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">{{ frmSignup.controls['password'].hasError('required') ||
+              frmSignup.controls['password'].hasError('hasNumber') ? 'cancel' :
+              'check_circle' }}</i>
+            Must contain at least 1 number
+          </label>
+
+          <label class="col"
+            [ngClass]="frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">{{ frmSignup.controls['password'].hasError('required') ||
+              frmSignup.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+              'check_circle' }}</i>
+            Must contain at least 1 letter in capital case
+          </label>
+
+          <label class="col"
+            [ngClass]="frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">{{ frmSignup.controls['password'].hasError('required') ||
+              frmSignup.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+              'check_circle' }}</i>
+            Must contain at least 1 letter in small case
+          </label>
+
+          <label class="col"
+            [ngClass]="frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+            <i class="material-icons">{{ frmSignup.controls['password'].hasError('required') ||
+              frmSignup.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' :
+              'check_circle' }}</i>
+            Must contain at least 1 special character
+          </label>
+        </div>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm Password</mat-label>
+          <input [type]="confirmHide ? 'password' : 'text'" matInput id="confirmPassword"
+            formControlName="confirmPassword">
+          <button mat-icon-button matSuffix (click)="confirmHide = !confirmHide; passwordHide = true" type="button"
+            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="confirmHide">
+            <mat-icon>{{confirmHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')">Password do not match
+          </mat-error>
+        </mat-form-field>
+
+        <button [disabled]="frmSignup.invalid" type="submit" mat-flat-button color="primary">Register</button>
+      </form>
+      <button mat-raised-button class="googleSignIn" (click)="googleSignIn()">Sign up with
+        Google</button>
+      <p>Already registered? <a routerLink='/login'>Login</a></p>
+    </mat-card>
+  </div>
+</div>

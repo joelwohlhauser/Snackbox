@@ -1,0 +1,85 @@
+<div class="container-fluid">
+
+  <div class="heading">
+    <h1>Hello, {{ username }}</h1>
+  </div>
+
+  <div class="recipesContainer">
+    <mat-card>
+      <h1 *ngIf="!isAdmin">Your Recipes</h1>
+      <h3 *ngIf="isAdmin" class="adminWarning">You are an admin!<br>You can see and edit all post, including private and
+        deleted ones</h3>
+      <table mat-table [dataSource]="dataSource" class="recipesTable">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="recipe">
+          <th mat-header-cell *matHeaderCellDef> Recipe </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="'/recipe/' + element.id"> {{element.title}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="cookingTime">
+          <th mat-header-cell *matHeaderCellDef> Cooking Time </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="'/recipe/' + element.id"> {{element.cookingTime}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="servingSize">
+          <th mat-header-cell *matHeaderCellDef> Serving Size </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="'/recipe/' + element.id"> {{element.servingSize}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="autor">
+          <th mat-header-cell *matHeaderCellDef> Autor </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="'/recipe/' + element.id"> {{element.autor}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="'/recipe/' + element.id"> {{element.statusText}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <button class="CreateRecipeBtn" mat-raised-button color="primary" routerLink='/recipe/new'>Create Recipe</button>
+    </mat-card>
+  </div>
+
+  <div class="profileDetails" *ngIf="!isGoogleUser">
+    <mat-card>
+      <h1>Change Phone Number</h1>
+
+      <form [formGroup]="frmChangePhone" (submit)="ChangePhoneNumber()">
+        <mat-form-field appearance="fill">
+          <mat-label>New phone number</mat-label>
+          <input type="text" matInput id="phone" formControlName="phone">
+          <mat-error
+            *ngIf="frmChangePhone.controls['phone'].hasError('required') || frmChangePhone.controls['phone'].hasError('isValidPhoneNumber')">
+            Enter a valid phone number!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput [type]="passwordHide ? 'password' : 'text'" id="password"
+            formControlName="password">
+          <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'"
+            type="button" [attr.aria-pressed]="passwordHide">
+            <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error
+            *ngIf="frmChangePhone.controls['password'].hasError('required') || frmChangePhone.controls['password'].hasError('minlength')">
+            Please enter your full password.</mat-error>
+        </mat-form-field>
+
+        <button [disabled]="frmChangePhone.invalid" type="submit" mat-flat-button color="primary"
+          class="ChangePhoneNumberBtn">Change Phone
+          Number</button>
+      </form>
+
+    </mat-card>
+  </div>
+
+</div>

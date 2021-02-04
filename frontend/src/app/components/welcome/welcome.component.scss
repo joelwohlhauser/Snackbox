@@ -1,0 +1,62 @@
+.fullPageContainer {
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=ella-olsson-C1Q3qOTlegg-unsplash.jpg&w=2400);
+  background-size: cover;
+  height: calc(100vh - 64px);
+}
+
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.fullPageContainer img {
+  width: 35rem;
+  margin-bottom: 3rem;
+}
+
+.fullPageContainer p {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 500;
+  font-style: italic;
+  color: #ffffffd1;
+}
+
+.belowFullPageContainer {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(130deg, #c6e6d6 0%, #c6d8e6 100%);
+}
+
+.joinContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 100px 0px 160px 0px;
+}
+
+.belowFullPageContainer h2 {
+  font-size: 2rem;
+}
+
+.belowFullPageContainer p {
+  color: #444444;
+  line-height: 24px;
+  font-size: 19px;
+}
+
+.belowFullPageContainer button {
+  margin-top: 17px;
+  width: 150px;
+  height: 40px;
+  font-size: 17px;
+}
